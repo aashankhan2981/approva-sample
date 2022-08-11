@@ -6,28 +6,17 @@ import React from "react";
 import SelectBox from "../component/SelectBox";
 import styles from "../styles/Home.module.css";
 interface SelectBox {
-  checked: boolean;
+  amount: string;
   title: string;
 }
 const Home: NextPage = () => {
-  const [stepName, setStepName] = React.useState<string>("1/ 3");
-  const [selectBoxes, setSelectBoxes] = React.useState<Array<SelectBox>>([
-    { checked: true, title: "Royal Bank of Canada" },
-    { checked: false, title: "TD Canada Trust" },
-    { checked: false, title: "Scotiabank Card Services" },
-    { checked: false, title: "None of the above" },
+  const [stepName, setStepName] = React.useState<string>("3/ 3");
+  const [results, setResults] = React.useState<Array<SelectBox>>([
+    { amount: "692", title: "Your Credit Score" },
+    { amount: "$ 43, 245", title: "Your Total Outstanding Debts" },
+    { amount: "$3.265", title: "Your Total Monthly payments" },
   ]);
-  const onClick = (index: number) => {
-    const newSelectBoxes = [...selectBoxes];
-    const array: any = newSelectBoxes.map((item, i) => {
-      if (i === index) {
-        return { ...item, checked: !item.checked };
-      }
 
-      return { ...item, checked: false };
-    });
-    setSelectBoxes(array);
-  };
   return (
     <Box
       display={"flex"}
@@ -48,7 +37,7 @@ const Home: NextPage = () => {
           color="#1C2D41"
           textAlign={"center"}
         >
-          We need to confirm some information
+          Great news! You’re verified
         </Typography>
         <Typography
           variant="body1"
@@ -57,9 +46,7 @@ const Home: NextPage = () => {
           marginTop={"13px"}
           textAlign={"center"}
         >
-          There’s only one you - and to ensure accuracy, let’s make sure we have
-          the right information. We’ll use it to run a soft credit check that
-          won’t affect your score.
+          Please see below for more information about your Credit information.
         </Typography>
       </Box>
       <Box
@@ -88,38 +75,15 @@ const Home: NextPage = () => {
           </Typography>
         </Box>
       </Box>
-      <Box marginTop={"26px"}  sx={{
-        display: "flex",
-        flexDirection:'column',
-            justifyContent: { md: "start", xs: "center" },
-          }} maxWidth={"667px"} width={"100%"}>
-        <Typography
-          variant="body1"
-          fontWeight={"400"}
-          fontSize={"20px"}
-          lineHeight={"30px"}
-          color="#000000"
-          sx={{
-            textAlign: { md: "left",xs:'center' },
-            
-          }}
-        >
-          As of March 2022, you current have (1) Credit Card with an outstanding
-          balance of $ 12,341.23 at which Financial Institution?
-        </Typography>
-        <Typography
-          variant="body1"
-          fontWeight={"400"}
-          fontSize={"20px"}
-          lineHeight={"30px"}
-          color="#000000"
-          sx={{
-          textAlign: { md: "left",xs:'center' },
-            
-          }}
-        >
-          Select one option:
-        </Typography>
+      <Box
+        marginTop={"26px"}
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: { md: "start", xs: "center" },
+        }}
+        width={"100%"}
+      >
         <Box
           display={"flex"}
           sx={{
@@ -133,34 +97,48 @@ const Home: NextPage = () => {
             flexDirection={"column"}
             gap={"18px"}
             alignItems={"start"}
-            maxWidth={"277px"}
+            width={"100%"}
           >
-            {selectBoxes.map((item, index) => {
-              return (
+            <Box width={"100%"} display={'flex'} flexDirection={'column'} gap={'43px'} >
+              {results?.map((result, index) => (
                 <Box
                   display={"flex"}
-                  gap={"18px"}
-                  alignItems={"start"}
-                  justifyContent="start"
+                  maxWidth={"485px"}
+                  width={"100"}
+                  justifyContent={"space-between"}
+                  alignItems="center"
+                  key={index}
+                  gap={"15px"}
                 >
-                  <SelectBox
-                    checked={item.checked}
-                    onClick={onClick}
-                    index={index}
-                    key={index}
-                  />
+                  <Typography
+                    variant="body1"
+                    fontWeight={"400"}
+                    fontSize={"20px"}
+                    lineHeight={"30px"}
+                    maxWidth={"308px"}
+                    width={"100%"}
+                    textAlign={"right"}
+                    color="#000000"
+                  >
+                    {result?.title}
+                  </Typography>
                   <Typography
                     variant="body1"
                     fontWeight={"400"}
                     fontSize={"20px"}
                     lineHeight={"30px"}
                     color="#000000"
+                    maxWidth={"103px"}
+                    width={"100%"}
+                    sx={{
+                      textAlign: { md: "left", xs: "left" },
+                    }}
                   >
-                    {item?.title}
+                    {result?.amount}
                   </Typography>
                 </Box>
-              );
-            })}
+              ))}
+            </Box>
           </Box>
         </Box>
       </Box>

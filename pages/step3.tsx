@@ -1,20 +1,19 @@
 import { Box, Typography } from "@mui/material";
 import type { NextPage } from "next";
-import Head from "next/head";
-import Image from "next/image";
+
 import React from "react";
 import SelectBox from "../component/SelectBox";
-import styles from "../styles/Home.module.css";
+
 interface SelectBox {
   checked: boolean;
   title: string;
 }
-const Home: NextPage = () => {
-  const [stepName, setStepName] = React.useState<string>("1/ 3");
+const Step3: NextPage = () => {
+  const [stepName, setStepName] = React.useState<string>("3/ 3");
   const [selectBoxes, setSelectBoxes] = React.useState<Array<SelectBox>>([
-    { checked: true, title: "Royal Bank of Canada" },
-    { checked: false, title: "TD Canada Trust" },
-    { checked: false, title: "Scotiabank Card Services" },
+    { checked: true, title: "OSAP Student Loan Services" },
+    { checked: false, title: "CIBC Personal Lending" },
+    { checked: false, title: "TDCT Loans" },
     { checked: false, title: "None of the above" },
   ]);
   const onClick = (index: number) => {
@@ -38,8 +37,10 @@ const Home: NextPage = () => {
       width={"100%"}
       margin={"0 auto"}
       paddingX={"16px"}
+      marginTop={"55px"}
+      marginBottom={"20px"}
     >
-      <Box marginTop={"55px"}>
+      <Box >
         <Typography
           variant="body1"
           fontWeight={700}
@@ -104,8 +105,7 @@ const Home: NextPage = () => {
             
           }}
         >
-          As of March 2022, you current have (1) Credit Card with an outstanding
-          balance of $ 12,341.23 at which Financial Institution?
+          You currently have (1) outstanding loan with an amount owing of $16,553 as of May 2022. Which Financial Institution is this with?
         </Typography>
         <Typography
           variant="body1"
@@ -120,6 +120,7 @@ const Home: NextPage = () => {
         >
           Select one option:
         </Typography>
+   
         <Box
           display={"flex"}
           sx={{
@@ -128,19 +129,20 @@ const Home: NextPage = () => {
           }}
         >
           <Box
-            marginTop={"20px"}
+            marginTop={"60px"}
             display={"flex"}
             flexDirection={"column"}
             gap={"18px"}
             alignItems={"start"}
-            maxWidth={"277px"}
+
+            // maxWidth={"294px"}
           >
             {selectBoxes.map((item, index) => {
               return (
                 <Box
                   display={"flex"}
                   gap={"18px"}
-                  alignItems={"start"}
+                  alignItems={"center"}
                   justifyContent="start"
                 >
                   <SelectBox
@@ -168,4 +170,4 @@ const Home: NextPage = () => {
   );
 };
 
-export default Home;
+export default Step3;
